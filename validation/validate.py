@@ -6,7 +6,7 @@ from jsonschema import Draft202012Validator
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = PROJECT_ROOT / "validation" / "schemas" / "schema.json"
-INPUT_PATH = PROJECT_ROOT / "data" / "output" / "spotify_top100_approx_by_country.jsonl"
+INPUT_PATH = PROJECT_ROOT / "data" / "output" / "spotify_top50_artists_by_genre.jsonl"
 
 
 def main() -> int:

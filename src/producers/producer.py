@@ -11,117 +11,101 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from connectors.spotify_connector import SpotifyAPIError, SpotifyConnector
 
-DEFAULT_REGIONS = (
-    "AD,AL,AT,BA,BE,BG,CH,CY,CZ,DE,DK,EE,ES,FI,FR,GB,GR,HR,HU,IE,IS,IT,"
-    "LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RS,SE,SI,SK,SM,TR,UA,XK,"
-    "AG,AR,BB,BO,BR,BS,BZ,CA,CL,CO,CR,DM,DO,EC,GD,GT,GY,HN,HT,JM,KN,"
-    "LC,MX,NI,PA,PE,PY,SR,SV,TT,US,UY,VC,VE"
+DEFAULT_GENRES = (
+    "pop,hip-hop,r&b,rock,indie pop,indie rock,dance,electronic,techno,rap,"
+    "trap,drill,jazz,blues,metal,punk,reggae,country,folk,classical,latin,"
+    "k-pop,gospel,soundtrack,salsa,samba,indie,indie folk,heavy metal,"
+    "dance pop,folk rock,opera,world music,latin hip hop"
 )
-DEFAULT_QUERIES = (
-    "genre:pop,genre:hip-hop,genre:rock,genre:dance,genre:r-n-b,genre:latin"
-)
+GENRE_SEARCH_TERMS = {
+    "hip-hop": ("hip-hop", "hip hop", "rap", "trap", "drill", "latin hip hop"),
+    "r&b": ("r&b", "contemporary r&b", "soul", "funk"),
+    "rock": ("rock", "indie rock", "metal", "punk"),
+    "pop": ("pop", "indie pop"),
+    "dance": ("dance", "electronic", "techno"),
+}
 
 
-def collect_market_tracks(
+def parse_genres(config: str) -> list[str]:
+    genres = list(dict.fromkeys(genre.strip() for genre in config.split(",") if genre.strip()))
+    if not genres:
+        raise ValueError("SPOTIFY_ARTIST_GENRES must contain at least one genre")
+    return genres
+
+
+def collect_artists_for_genre(
     connector: SpotifyConnector,
-    market: str,
-    queries: list[str],
-    page_size: int,
-    track_limit: int,
+    genre: str,
+    limit: int,
 ) -> list[dict]:
-    tracks_by_id: dict[str, dict] = {}
-    for query in queries:
-        for track in connector.search_tracks(
-            query=query,
-            market=market,
-            limit=page_size,
-            max_tracks=page_size,
-        ):
-            track_id = track.get("spotify_track_id")
-            if not track_id:
-                continue
-            entry = tracks_by_id.setdefault(
-                track_id,
-                {"track": track, "search_queries": []},
-            )
-            if query not in entry["search_queries"]:
-                entry["search_queries"].append(query)
+    unique_artists = []
+    artists_by_id = {}
+    for search_genre in GENRE_SEARCH_TERMS.get(genre.casefold(), (genre,)):
+        remaining = limit - len(unique_artists)
+        if remaining <= 0:
+            break
 
-    ranked_tracks = sorted(
-        tracks_by_id.values(),
-        key=lambda entry: (
-            entry["track"].get("popularity")
-            if entry["track"].get("popularity") is not None
-            else -1,
-            entry["track"].get("spotify_track_id") or "",
-        ),
-        reverse=True,
-    )
-    return ranked_tracks[:track_limit]
+        candidates = connector.search_artists_by_genre(
+            genre=search_genre,
+            limit=remaining,
+        )
+        for artist in candidates:
+            artist_id = artist.get("id")
+            if not artist_id:
+                continue
+            entry = artists_by_id.get(artist_id)
+            if entry is None:
+                entry = {"artist": artist, "matched_genre_queries": []}
+                artists_by_id[artist_id] = entry
+                unique_artists.append(entry)
+            if search_genre not in entry["matched_genre_queries"]:
+                entry["matched_genre_queries"].append(search_genre)
+            if len(unique_artists) == limit:
+                break
+    return unique_artists
 
 
 def main() -> None:
     load_dotenv(PROJECT_ROOT / ".env")
 
     try:
+        genres = parse_genres(os.getenv("SPOTIFY_ARTIST_GENRES", DEFAULT_GENRES))
+        artists_per_genre = int(os.getenv("SPOTIFY_ARTISTS_PER_GENRE", "50"))
+        if not 1 <= artists_per_genre <= 50:
+            raise ValueError("SPOTIFY_ARTISTS_PER_GENRE must be between 1 and 50")
+
         connector = SpotifyConnector(
             client_id=os.getenv("SPOTIFY_CLIENT_ID", ""),
             client_secret=os.getenv("SPOTIFY_CLIENT_SECRET", ""),
         )
-        regions = [
-            region.strip().upper()
-            for region in os.getenv("SPOTIFY_CHART_REGIONS", DEFAULT_REGIONS).split(",")
-            if region.strip()
-        ]
-        queries = [
-            query.strip()
-            for query in os.getenv(
-                "SPOTIFY_SEARCH_QUERIES",
-                DEFAULT_QUERIES,
-            ).split(",")
-            if query.strip()
-        ]
-        page_size = int(os.getenv("SPOTIFY_SEARCH_LIMIT", "50"))
-        track_limit = int(os.getenv("SPOTIFY_TRACKS_PER_MARKET", "100"))
-        if not regions:
-            raise ValueError("SPOTIFY_CHART_REGIONS must contain at least one country")
-        if not queries:
-            raise ValueError("SPOTIFY_SEARCH_QUERIES must contain at least one query")
-        if page_size < 1 or page_size > 50:
-            raise ValueError("SPOTIFY_SEARCH_LIMIT must be between 1 and 50")
-        if track_limit < 1 or track_limit > 100:
-            raise ValueError("SPOTIFY_TRACKS_PER_MARKET must be between 1 and 100")
-
         output_dir = PROJECT_ROOT / "data" / "output"
         output_dir.mkdir(parents=True, exist_ok=True)
-        output_file = output_dir / "spotify_top100_approx_by_country.jsonl"
+        output_file = output_dir / "spotify_top50_artists_by_genre.jsonl"
         collected_at = datetime.now(timezone.utc).isoformat()
         count = 0
 
         with output_file.open("w", encoding="utf-8") as stream:
-            for region in regions:
-                ranked_tracks = collect_market_tracks(
+            for genre in genres:
+                unique_artists = collect_artists_for_genre(
                     connector=connector,
-                    market=region,
-                    queries=queries,
-                    page_size=page_size,
-                    track_limit=track_limit,
+                    genre=genre,
+                    limit=artists_per_genre,
                 )
-                for rank, entry in enumerate(ranked_tracks, start=1):
+                for rank, entry in enumerate(unique_artists, start=1):
                     message = {
-                        **entry["track"],
-                        "event_type": "spotify.track.popularity_estimate",
-                        "market": region,
-                        "estimated_rank": rank,
-                        "ranking_method": "search_results_by_global_popularity",
-                        "search_queries": entry["search_queries"],
+                        "event_type": "spotify.artist.genre_search_result",
+                        "genre": genre,
+                        "rank": rank,
+                        "ranking_method": "spotify_search_result_order",
+                        "matched_genre_queries": entry["matched_genre_queries"],
                         "collected_at_utc": collected_at,
+                        "artist": entry["artist"],
                     }
                     stream.write(json.dumps(message, ensure_ascii=False) + "\n")
                     count += 1
-                print(f"{region}: {len(ranked_tracks)} titres collectés")
+                print(f"{genre}: {len(unique_artists)} artistes récupérés")
 
-        print(f"{count} estimations écrites dans {output_file}")
+        print(f"{count} artistes écrits dans {output_file}")
     except (SpotifyAPIError, ValueError) as exc:
         print(f"Erreur d'ingestion Spotify: {exc}", file=sys.stderr)
         raise SystemExit(1)

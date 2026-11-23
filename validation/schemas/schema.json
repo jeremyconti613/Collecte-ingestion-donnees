@@ -1,56 +1,46 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Spotify track popularity estimate",
+  "title": "Spotify artist genre search result",
   "type": "object",
   "required": [
     "event_type",
-    "market",
-    "estimated_rank",
+    "genre",
+    "rank",
     "ranking_method",
-    "search_queries",
+    "matched_genre_queries",
     "collected_at_utc",
-    "spotify_track_id",
-    "name",
-    "popularity",
-    "duration_ms",
-    "explicit",
-    "release_date",
-    "album",
-    "artists",
-    "spotify_url"
+    "artist"
   ],
   "properties": {
-    "event_type": {"const": "spotify.track.popularity_estimate"},
-    "market": {"type": "string", "pattern": "^[A-Z]{2}$"},
-    "estimated_rank": {"type": "integer", "minimum": 1, "maximum": 100},
-    "ranking_method": {"const": "search_results_by_global_popularity"},
-    "search_queries": {"type": "array", "items": {"type": "string"}},
-    "collected_at_utc": {"type": "string", "format": "date-time"},
-    "spotify_track_id": {"type": ["string", "null"]},
-    "name": {"type": ["string", "null"]},
-    "popularity": {"type": ["integer", "null"], "minimum": 0, "maximum": 100},
-    "duration_ms": {"type": ["integer", "null"], "minimum": 0},
-    "explicit": {"type": ["boolean", "null"]},
-    "release_date": {"type": ["string", "null"]},
-    "album": {
-      "type": "object",
-      "properties": {
-        "id": {"type": ["string", "null"]},
-        "name": {"type": ["string", "null"]}
-      }
+    "event_type": {"const": "spotify.artist.genre_search_result"},
+    "genre": {"type": "string", "minLength": 1},
+    "rank": {"type": "integer", "minimum": 1, "maximum": 50},
+    "ranking_method": {
+      "const": "spotify_search_result_order"
     },
-    "artists": {
+    "matched_genre_queries": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["id", "name"],
-        "properties": {
-          "id": {"type": ["string", "null"]},
-          "name": {"type": ["string", "null"]}
-        }
-      }
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
     },
-    "external_ids": {"type": "object"},
-    "spotify_url": {"type": ["string", "null"], "format": "uri"}
+    "collected_at_utc": {"type": "string", "format": "date-time"},
+    "artist": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string"},
+        "popularity": {"type": ["integer", "null"], "minimum": 0, "maximum": 100},
+        "genres": {"type": "array", "items": {"type": "string"}},
+        "followers": {
+          "type": ["object", "null"],
+          "properties": {
+            "total": {"type": ["integer", "null"], "minimum": 0}
+          }
+        },
+        "external_urls": {"type": "object"},
+        "images": {"type": "array"}
+      }
+    }
   }
 }
