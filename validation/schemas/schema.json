@@ -1,1 +1,56 @@
-{}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Spotify track popularity estimate",
+  "type": "object",
+  "required": [
+    "event_type",
+    "market",
+    "estimated_rank",
+    "ranking_method",
+    "search_queries",
+    "collected_at_utc",
+    "spotify_track_id",
+    "name",
+    "popularity",
+    "duration_ms",
+    "explicit",
+    "release_date",
+    "album",
+    "artists",
+    "spotify_url"
+  ],
+  "properties": {
+    "event_type": {"const": "spotify.track.popularity_estimate"},
+    "market": {"type": "string", "pattern": "^[A-Z]{2}$"},
+    "estimated_rank": {"type": "integer", "minimum": 1, "maximum": 100},
+    "ranking_method": {"const": "search_results_by_global_popularity"},
+    "search_queries": {"type": "array", "items": {"type": "string"}},
+    "collected_at_utc": {"type": "string", "format": "date-time"},
+    "spotify_track_id": {"type": ["string", "null"]},
+    "name": {"type": ["string", "null"]},
+    "popularity": {"type": ["integer", "null"], "minimum": 0, "maximum": 100},
+    "duration_ms": {"type": ["integer", "null"], "minimum": 0},
+    "explicit": {"type": ["boolean", "null"]},
+    "release_date": {"type": ["string", "null"]},
+    "album": {
+      "type": "object",
+      "properties": {
+        "id": {"type": ["string", "null"]},
+        "name": {"type": ["string", "null"]}
+      }
+    },
+    "artists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {"type": ["string", "null"]},
+          "name": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "external_ids": {"type": "object"},
+    "spotify_url": {"type": ["string", "null"], "format": "uri"}
+  }
+}
