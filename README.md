@@ -1,85 +1,42 @@
-# Collecte et ingestion de données Spotify
+# Collecte incrémentale de titres Spotify
 
-## Étape 1 - Cadrage du besoin
+## Objectif
 
-### Contexte métier
+Collecter les titres des 200 artistes source sélectionnés, dont les albums ont une date de sortie Spotify au 1er janvier 2026 ou après. Chaque occurrence par artiste, album et titre est enregistrée avec sa date d'extraction UTC.
 
-Le projet compare les artistes que Spotify retourne pour des recherches par genre. L'objectif est d'explorer les résultats de recherche par genre et de conserver leur ordre tel que renvoyé par Spotify.
+La Web API Spotify ne fournit pas de classement exhaustif des artistes les plus populaires. Le périmètre est donc une liste fixe de 200 IDs Spotify dans `data/input/spotify_track_seed_artists.json`, conservée à l’identique entre les relances.
 
-**Question analytique :** quels artistes apparaissent dans les résultats Spotify pour chaque genre configuré ?
+## Fonctionnement
 
-### Source et données
+Le connecteur s'authentifie avec OAuth Client Credentials, récupère par pages de 10 les albums, singles, compilations et apparitions des artistes, puis lit leurs titres. Il filtre sur la date de sortie de l'album donnée par Spotify; une réédition peut ainsi être considérée comme une sortie récente. Les dates absentes ou invalides sont ignorées.
 
-- API : Spotify Web API, endpoint `GET /v1/search` avec `type=artist` et le filtre `genre`.
-- Format source : JSON.
-- Accès : OAuth 2.0 Client Credentials.
-- Fréquence : collecte quotidienne ou à la demande.
-- Volume : jusqu'à 50 artistes candidats par genre et par exécution.
-- Données conservées : objet artiste renvoyé par Spotify, notamment son ID, son nom, ses images et son URL. Certains champs peuvent être absents.
+Le résultat est ajouté à `data/output/spotify_artist_tracks_since_2026.jsonl`, un objet JSON par ligne. La clé d'idempotence est `(seed_artist_id, album_id, track_id)`: les occurrences déjà collectées sont ignorées, mais un même titre sur plusieurs albums est conservé. En cas d'interruption, les lignes déjà écrites restent présentes et la relance continue sans les dupliquer.
 
-**Limite importante :** la Web API ne fournit pas un classement officiel des artistes par genre ni les écoutes par pays. Les filtres de genre peuvent retourner peu ou aucun artiste; Spotify ne fournit pas de liste publique exhaustive et stable des valeurs acceptées. Les requêtes alternatives servent à élargir les résultats, sans garantir 50 artistes distincts. Le `rank` représente leur ordre de collecte, pas un classement officiel ou d'écoutes.
+## Configuration et exécution
 
-### Volume, vélocité et variété
-
-- **Volume :** faible, au plus 50 artistes par genre configuré.
-- **Vélocité :** faible à modérée; collecte à la demande ou planifiée.
-- **Variété :** JSON semi-structuré, avec chaînes, listes et métadonnées numériques.
-
-### Pattern et architecture
-
-Le pattern retenu est un **batch d'extraction API** : une ou plusieurs recherches paginées par genre, déduplication par ID en gardant l'ordre fourni par Spotify et écriture JSONL. Les marchés Europe/Amériques ne peuvent pas être classés indépendamment par cette recherche; il n'y a donc pas de rang par pays.
-
-```text
-Genres (.env)
-     |
-     v
-Spotify Web API - recherche artiste par genre
-     |
-     v
-Résultats de recherche -> déduplication en conservant l'ordre Spotify
-     |
-     v
-JSONL avec rang indicatif et objet artiste source
-     |
-     v
-Validation JSON Schema
-```
-
-## Étape 2 - Connecteur Spotify
-
-Le connecteur dans [connectors/spotify_connector.py](./connectors/spotify_connector.py) gère OAuth, les recherches d'artistes paginées par lots de 10, les erreurs temporaires, les quotas HTTP 429 et le renouvellement du jeton après HTTP 401. Le producteur dans [src/producers/producer.py](./src/producers/producer.py) déduplique les artistes par ID en conservant l'ordre de recherche et garde l'objet artiste retourné par l'API.
-
-### Configuration
-
-Dans `.env`, renseigner les identifiants Spotify Developer et les genres :
+Le fichier `.env` local doit contenir les identifiants Spotify Developer et :
 
 ```dotenv
-SPOTIFY_CLIENT_ID=votre_client_id
-SPOTIFY_CLIENT_SECRET=votre_client_secret
-SPOTIFY_ARTIST_GENRES=pop,hip-hop,rock,dance,r-n-b,latin
-SPOTIFY_ARTISTS_PER_GENRE=50
+SPOTIFY_TRACK_ARTIST_LIMIT=200
 ```
 
-`SPOTIFY_ARTISTS_PER_GENRE` peut être réglé entre 1 et 50. Les genres par défaut ont été testés avec des requêtes Spotify et incluent pop, hip-hop, r&b, rock, indie pop/rock, dance, electronic, techno, rap, trap, drill, jazz, blues, metal, punk, reggae, country, folk, classical, latin, k-pop, gospel, soundtrack, salsa, samba, indie, indie folk, heavy metal, dance pop, folk rock, opera, world music et latin hip hop. Pour compléter hip-hop et r&b, le producteur essaie des termes associés (hip hop/rap/trap/drill/latin hip hop; contemporary r&b/soul/funk), puis déduplique les artistes. Les termes effectivement utilisés sont consignés dans `matched_genre_queries`. Spotify peut retourner moins de 50 artistes; aucun remplissage artificiel n'est fait. Spotify ne fournit pas de catalogue officiel stable des valeurs de genre; la requête est vérifiée par ses résultats et non par un endpoint de taxonomie.
+Ne partagez pas les identifiants et ne les commitez pas. Le fichier `.env` est ignoré par Git.
 
-Ne jamais versionner les identifiants. `.env` est exclu par `.gitignore`; s'il est déjà suivi par Git dans votre clone, le retirer de l'index avec `git rm --cached .env`.
-
-### Installation, collecte et validation
+Depuis la racine du dépôt, exécuter :
 
 ```powershell
-python -m pip install -r requirements.txt
-python src\producers\producer.py
+python src\producers\track_producer.py
 python validation\validate.py
 ```
 
-Le résultat est enregistré dans `data/output/spotify_top50_artists_by_genre.jsonl`. Chaque ligne contient le genre demandé, la position de l'artiste dans les résultats de recherche Spotify et l'objet artiste source. Cette position n'est pas un classement des écoutes ni un Top 50 officiel par genre ou par pays.
+La collecte peut être longue et reste soumise aux quotas Spotify. Le validateur lit le fichier incrémental généré.
 
-## Tableau de bord
+## Dashboard
 
-Après avoir collecté les données, démarrez le serveur local depuis la racine du projet :
+Démarrer le serveur depuis la racine :
 
 ```powershell
 python -m http.server 8000
 ```
 
-Ouvrez ensuite [http://localhost:8000/dashboard/](http://localhost:8000/dashboard/). Le tableau de bord lit le JSONL local, permet de filtrer par genre et par nom, affiche les profils Spotify et montre le nombre d'artistes collectés par genre. Il ne fait aucun appel externe et conserve l'avertissement sur l'ordre des résultats de recherche.
+Puis ouvrir [http://localhost:8000/dashboard/](http://localhost:8000/dashboard/). Le dashboard affiche tous les titres dans une liste unique, avec album, date, artistes crédités et lien Spotify. La recherche permet de filtrer par titre, artiste ou album.

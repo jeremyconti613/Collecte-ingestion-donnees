@@ -1,12 +1,12 @@
 import json
 from pathlib import Path
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = PROJECT_ROOT / "validation" / "schemas" / "schema.json"
-INPUT_PATH = PROJECT_ROOT / "data" / "output" / "spotify_top50_artists_by_genre.jsonl"
+INPUT_PATH = PROJECT_ROOT / "data" / "output" / "spotify_artist_tracks_since_2026.jsonl"
 
 
 def main() -> int:
@@ -15,7 +15,7 @@ def main() -> int:
         return 1
 
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
-    validator = Draft202012Validator(schema)
+    validator = Draft202012Validator(schema, format_checker=FormatChecker())
     valid = 0
     invalid = 0
 

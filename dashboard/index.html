@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101510">
-  <title>Spotify — artistes par genre</title>
+  <title>Spotify — nouveautés musicales</title>
   <style>
     :root {
       color-scheme: dark;
@@ -70,35 +70,8 @@
     .notice strong { color: var(--orange); }
     .notice-icon { flex: 0 0 auto; color: var(--orange); font-size: 18px; line-height: 1.2; }
 
-    .overview {
-      display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 18px;
-      align-items: stretch; margin-bottom: 22px;
-    }
     .panel { border: 1px solid var(--line); border-radius: var(--radius); background: #171d18ed; }
-    .chart-panel { padding: 22px; }
-    .section-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
     h2 { margin: 0; font-size: 19px; letter-spacing: -.035em; }
-    .subheading { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
-    .chart-list { display: grid; gap: 10px; }
-    .chart-row {
-      display: grid; grid-template-columns: 100px minmax(60px, 1fr) 56px; align-items: center; gap: 12px;
-      width: 100%; padding: 3px 0; border: 0; background: transparent; text-align: left; cursor: pointer;
-    }
-    .chart-row:hover .chart-label, .chart-row.active .chart-label { color: var(--green); }
-    .chart-label { overflow: hidden; color: #e2e8de; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
-    .track { height: 8px; overflow: hidden; border-radius: 99px; background: #303930; }
-    .fill { height: 100%; min-width: 3px; border-radius: inherit; background: linear-gradient(90deg, #72cc3e, var(--green)); }
-    .chart-value { color: var(--muted); font-size: 11px; text-align: right; font-variant-numeric: tabular-nums; }
-    .chart-more {
-      margin-top: 14px; padding: 0; border: 0; color: var(--green); background: transparent;
-      font-size: 12px; font-weight: 700; cursor: pointer;
-    }
-
-    .snapshot-panel { display: flex; flex-direction: column; justify-content: space-between; padding: 23px; }
-    .snapshot-label { color: var(--muted); font-size: 12px; }
-    .snapshot-value { margin: 9px 0 4px; font-size: 34px; font-weight: 760; letter-spacing: -.06em; }
-    .snapshot-caption { color: var(--muted); font-size: 12px; }
-    .divider { height: 1px; margin: 18px 0; background: var(--line); }
     .refresh {
       padding: 10px 13px; border: 1px solid #455343; border-radius: 10px;
       color: var(--text); background: var(--panel-soft); font-size: 12px; font-weight: 700; cursor: pointer;
@@ -128,7 +101,7 @@
       transition: background .15s ease;
     }
     .artist-row:hover { background: #222b23; }
-    .rank { color: #82907f; font-size: 15px; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; }
+    .release-date { color: #82907f; font-size: 11px; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; }
     .avatar { width: 52px; height: 52px; border-radius: 12px; object-fit: cover; background: #2b352c; }
     .avatar-fallback { display: grid; place-items: center; color: #c4d2bf; font-size: 19px; font-weight: 800; }
     .artist-name { overflow: hidden; font-size: 14px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
@@ -150,12 +123,9 @@
       .hero { grid-template-columns: 1fr; gap: 22px; margin-top: 42px; }
       .hero-count { text-align: left; }
       .hero-count strong { display: inline; margin-right: 7px; font-size: 34px; }
-      .overview { grid-template-columns: 1fr; }
-      .snapshot-panel { min-height: 170px; }
       .results-head { align-items: flex-start; flex-direction: column; }
       .controls { width: 100%; }
       .search { flex: 1; width: 100%; min-width: 0; }
-      .chart-row { grid-template-columns: 82px minmax(40px, 1fr) 52px; gap: 9px; }
       .artist-row { grid-template-columns: 28px 46px minmax(0, 1fr); gap: 10px; }
       .avatar { width: 46px; height: 46px; }
       .artist-link { grid-column: 3; justify-self: start; padding: 5px 8px; }
@@ -170,57 +140,34 @@
     </div>
     <div class="hero">
       <div>
-        <p class="eyebrow">Découverte musicale</p>
-        <h1>Les artistes,<br>genre par genre.</h1>
-        <p>Explorez les artistes renvoyés par Spotify pour chaque recherche de genre. Filtrez, parcourez et ouvrez leur profil.</p>
+        <p class="eyebrow">Sorties depuis le 1er janvier 2026</p>
+        <h1>Les nouveaux<br>titres des artistes.</h1>
+        <p>Parcourez les morceaux publiés sur les albums des 200 artistes source sélectionnés, avec leur date de sortie et leur album.</p>
       </div>
-      <div class="hero-count"><strong id="total-artists">—</strong><span>résultats chargés</span></div>
+      <div class="hero-count"><strong id="total-artists">—</strong><span>titres chargés</span></div>
     </div>
   </header>
 
   <main class="shell">
     <div class="notice">
       <span class="notice-icon">ⓘ</span>
-      <div><strong>À propos du rang :</strong> il reflète l’ordre renvoyé par les recherches Spotify, après déduplication. Ce n’est pas un classement officiel d’écoute ou de popularité.</div>
+      <div><strong>À propos des données :</strong> la date est celle de sortie de l’album dans Spotify (une réédition peut donc apparaître comme sortie récente). Chaque ligne représente une occurrence par artiste, album et titre.</div>
     </div>
-
-    <section class="overview">
-      <div class="panel chart-panel">
-        <div class="section-heading">
-          <div><h2>Résultats par genre</h2><p class="subheading">Nombre d’artistes récupérés · maximum configuré : 50</p></div>
-        </div>
-        <div id="genre-chart" class="chart-list"></div>
-        <button id="show-all-genres" class="chart-more" type="button" hidden>Afficher tous les genres</button>
-      </div>
-      <aside class="panel snapshot-panel">
-        <div>
-          <span class="snapshot-label">Genre sélectionné</span>
-          <div id="selected-genre-count" class="snapshot-value">—</div>
-          <div id="selected-genre-label" class="snapshot-caption">Chargement des données…</div>
-        </div>
-        <div>
-          <div class="divider"></div>
-          <button id="reload" class="refresh" type="button">↻ Recharger les données</button>
-        </div>
-      </aside>
-    </section>
 
     <section class="panel results">
       <div class="results-head">
         <div class="results-title">
-          <h2 id="list-title">Artistes</h2>
+          <h2 id="list-title">Titres</h2>
           <span id="visible-count" class="count-badge">0</span>
         </div>
         <div class="controls">
-          <select id="genre-select" class="control" aria-label="Choisir un genre">
-            <option value="">Tous les genres</option>
-          </select>
-          <input id="search" class="control search" type="search" placeholder="Rechercher un artiste…" aria-label="Rechercher un artiste">
+          <input id="search" class="control search" type="search" placeholder="Rechercher un titre, artiste, album…" aria-label="Rechercher un titre, artiste ou album">
+          <button id="reload" class="refresh" type="button">↻ Recharger les données</button>
         </div>
       </div>
-      <div id="results-meta" class="results-meta">Ordre des résultats de recherche Spotify</div>
+      <div id="results-meta" class="results-meta">Titres sur albums dont la date de sortie est depuis le 1er janvier 2026</div>
       <div id="artist-list" class="artist-list">
-        <div class="empty"><strong>Chargement…</strong>Lecture du fichier de résultats JSONL</div>
+        <div class="empty"><strong>Chargement…</strong>Lecture du fichier incrémental JSONL</div>
       </div>
     </section>
     <p id="status" class="status" role="status"></p>
@@ -230,16 +177,10 @@
 
   <script>
     (() => {
-      const DATA_URL = "../data/output/spotify_top50_artists_by_genre.jsonl";
-      const MAX_CHART_ROWS = 12;
-      const state = { records: [], genre: "", query: "", showAllGenres: false };
+      const DATA_URL = "../data/output/spotify_artist_tracks_since_2026.jsonl";
+      const state = { records: [], query: "" };
       const elements = {
         total: document.querySelector("#total-artists"),
-        chart: document.querySelector("#genre-chart"),
-        showAll: document.querySelector("#show-all-genres"),
-        selectedCount: document.querySelector("#selected-genre-count"),
-        selectedLabel: document.querySelector("#selected-genre-label"),
-        select: document.querySelector("#genre-select"),
         search: document.querySelector("#search"),
         listTitle: document.querySelector("#list-title"),
         visibleCount: document.querySelector("#visible-count"),
@@ -256,47 +197,32 @@
         return node;
       }
 
-      function artistName(record) {
-        return record.artist && record.artist.name ? record.artist.name : "Artiste sans nom";
+      function trackName(record) {
+        return record.track && record.track.name ? record.track.name : "Titre sans nom";
       }
 
-      function genresSummary(record) {
-        const terms = Array.isArray(record.matched_genre_queries) ? record.matched_genre_queries : [];
-        return terms.length ? `Recherche : ${terms.join(" · ")}` : `Genre : ${record.genre}`;
+      function trackArtists(record) {
+        const artists = record.track && Array.isArray(record.track.artists) ? record.track.artists : [];
+        return artists.map(artist => artist.name).filter(Boolean).join(", ") || record.seed_artist_name || "Artiste inconnu";
       }
 
       function makeCard(record) {
         const row = element("article", "artist-row");
-        row.append(element("span", "rank", String(record.rank ?? "—")));
-
-        const imageUrl = record.artist && Array.isArray(record.artist.images)
-          ? record.artist.images.find(image => image && typeof image.url === "string" && image.url.startsWith("https://"))?.url
-          : null;
-        let avatar;
-        if (imageUrl) {
-          avatar = element("img", "avatar");
-          avatar.src = imageUrl;
-          avatar.alt = "";
-          avatar.loading = "lazy";
-          avatar.referrerPolicy = "no-referrer";
-          avatar.addEventListener("error", () => {
-            const fallback = element("div", "avatar avatar-fallback", artistName(record).slice(0, 1).toUpperCase());
-            avatar.replaceWith(fallback);
-          }, { once: true });
-        } else {
-          avatar = element("div", "avatar avatar-fallback", artistName(record).slice(0, 1).toUpperCase());
-        }
-        row.append(avatar);
+        const cover = element("div", "avatar avatar-fallback", trackName(record).slice(0, 1).toUpperCase());
+        row.append(element("span", "release-date", record.release_date || "—"));
+        row.append(cover);
 
         const info = element("div");
-        info.append(element("div", "artist-name", artistName(record)));
-        info.append(element("div", "artist-meta", genresSummary(record)));
+        info.append(element("div", "artist-name", trackName(record)));
+        const album = record.album_name || "Album inconnu";
+        const release = record.release_date || "date inconnue";
+        info.append(element("div", "artist-meta", `${trackArtists(record)} · ${album} · ${release}`));
         row.append(info);
 
-        const spotifyUrl = record.artist && record.artist.external_urls
-          ? record.artist.external_urls.spotify
+        const spotifyUrl = record.track && record.track.external_urls
+          ? record.track.external_urls.spotify
           : null;
-        if (typeof spotifyUrl === "string" && spotifyUrl.startsWith("https://open.spotify.com/artist/")) {
+        if (typeof spotifyUrl === "string" && spotifyUrl.startsWith("https://open.spotify.com/track/")) {
           const link = element("a", "artist-link", "Écouter ↗");
           link.href = spotifyUrl;
           link.target = "_blank";
@@ -309,25 +235,22 @@
       function filteredRecords() {
         const query = state.query.trim().toLocaleLowerCase("fr");
         return state.records.filter(record => {
-          const genreMatches = !state.genre || record.genre === state.genre;
-          const nameMatches = !query || artistName(record).toLocaleLowerCase("fr").includes(query);
-          return genreMatches && nameMatches;
+          const searchText = `${trackName(record)} ${trackArtists(record)} ${record.album_name || ""}`.toLocaleLowerCase("fr");
+          return !query || searchText.includes(query);
         });
       }
 
       function renderList() {
         const records = filteredRecords();
-        elements.listTitle.textContent = state.genre ? `Artistes · ${state.genre}` : "Artistes";
+        elements.listTitle.textContent = "Titres";
         elements.visibleCount.textContent = String(records.length);
-        elements.resultsMeta.textContent = state.genre
-          ? `Ordre des résultats Spotify pour « ${state.genre} » · ${records.length} résultat${records.length === 1 ? "" : "s"}`
-          : `Ordre des résultats Spotify · ${records.length} résultat${records.length === 1 ? "" : "s"}`;
+        elements.resultsMeta.textContent = `Titres récupérés depuis les albums Spotify · ${records.length} résultat${records.length === 1 ? "" : "s"}`;
 
         elements.artistList.replaceChildren();
         if (!records.length) {
           const empty = element("div", "empty");
-          empty.append(element("strong", "", state.query ? "Aucun artiste trouvé" : "Aucune donnée à afficher"));
-          empty.append(document.createTextNode(state.query ? "Essayez un autre nom ou changez de genre." : "Lancez d’abord le producteur Spotify."));
+          empty.append(element("strong", "", state.query ? "Aucun titre trouvé" : "Aucune donnée à afficher"));
+          empty.append(document.createTextNode(state.query ? "Essayez un autre terme." : "Lancez d’abord le producteur de titres."));
           elements.artistList.append(empty);
           return;
         }
@@ -336,45 +259,8 @@
         elements.artistList.append(fragment);
       }
 
-      function renderChart() {
-        const counts = new Map();
-        state.records.forEach(record => counts.set(record.genre, (counts.get(record.genre) || 0) + 1));
-        const entries = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "fr"));
-        const visibleEntries = state.showAllGenres ? entries : entries.slice(0, MAX_CHART_ROWS);
-        elements.chart.replaceChildren();
-        const max = Math.max(50, ...entries.map(([, count]) => count));
-
-        visibleEntries.forEach(([genre, count]) => {
-          const button = element("button", `chart-row${state.genre === genre ? " active" : ""}`);
-          button.type = "button";
-          button.setAttribute("aria-label", `${genre}: ${count} artistes`);
-          button.addEventListener("click", () => {
-            state.genre = state.genre === genre ? "" : genre;
-            elements.select.value = state.genre;
-            render();
-          });
-          button.append(element("span", "chart-label", genre));
-          const track = element("span", "track");
-          const fill = element("span", "fill");
-          fill.style.width = `${Math.max(3, count / max * 100)}%`;
-          track.append(fill);
-          button.append(track);
-          button.append(element("span", "chart-value", `${count} / 50`));
-          elements.chart.append(button);
-        });
-
-        elements.showAll.hidden = entries.length <= MAX_CHART_ROWS;
-        elements.showAll.textContent = state.showAllGenres ? "Réduire la liste" : `Afficher les ${entries.length} genres`;
-      }
-
       function render() {
-        renderChart();
         renderList();
-        const selected = state.genre
-          ? state.records.filter(record => record.genre === state.genre).length
-          : state.records.length;
-        elements.selectedCount.textContent = String(selected);
-        elements.selectedLabel.textContent = state.genre || `${new Set(state.records.map(record => record.genre)).size} genres collectés`;
         elements.total.textContent = String(state.records.length);
       }
 
@@ -391,24 +277,15 @@
             if (!line.trim()) return;
             try {
               const record = JSON.parse(line);
-              if (record && typeof record.genre === "string" && record.artist) records.push(record);
+              if (record && record.event_type === "spotify.artist.album_track" && record.track) records.push(record);
               else invalidLines.push(index + 1);
             } catch {
               invalidLines.push(index + 1);
             }
           });
           state.records = records;
-          const genres = [...new Set(records.map(record => record.genre))].sort((a, b) => a.localeCompare(b, "fr"));
-          elements.select.replaceChildren(element("option", "", "Tous les genres"));
-          genres.forEach(genre => {
-            const option = element("option", "", genre);
-            option.value = genre;
-            elements.select.append(option);
-          });
-          if (!genres.includes(state.genre)) state.genre = genres.includes("pop") ? "pop" : (genres[0] || "");
-          elements.select.value = state.genre;
           render();
-          const timestamp = records.reduce((latest, record) => record.collected_at_utc > latest ? record.collected_at_utc : latest, "");
+          const timestamp = records.reduce((latest, record) => record.extracted_at_utc > latest ? record.extracted_at_utc : latest, "");
           const collected = timestamp ? new Date(timestamp).toLocaleString("fr-FR") : "date non disponible";
           elements.status.textContent = `${records.length} résultats chargés · collecte du ${collected}${invalidLines.length ? ` · ${invalidLines.length} ligne(s) JSONL ignorée(s)` : ""}`;
         } catch (error) {
@@ -420,17 +297,9 @@
         }
       }
 
-      elements.select.addEventListener("change", event => {
-        state.genre = event.target.value;
-        render();
-      });
       elements.search.addEventListener("input", event => {
         state.query = event.target.value;
         renderList();
-      });
-      elements.showAll.addEventListener("click", () => {
-        state.showAllGenres = !state.showAllGenres;
-        renderChart();
       });
       elements.reload.addEventListener("click", loadData);
       loadData();

@@ -1,0 +1,802 @@
+[
+  {
+    "id": "3Nrfpe0tUJi4K4DXYWgMUX",
+    "name": "BTS"
+  },
+  {
+    "id": "1McMsnEElThX1knmY4oliG",
+    "name": "Olivia Rodrigo"
+  },
+  {
+    "id": "0du5cEVh5yTK9QJze8zA0C",
+    "name": "Bruno Mars"
+  },
+  {
+    "id": "6qqNVTkY8uBg9cP3Jd7DAH",
+    "name": "Billie Eilish"
+  },
+  {
+    "id": "1uNFoZAHBGtllmzznpCI3s",
+    "name": "Justin Bieber"
+  },
+  {
+    "id": "1Cs0zKBU1kc0i8ypK3B9ai",
+    "name": "David Guetta"
+  },
+  {
+    "id": "66CXWjxzNUsdJxJ2JdwvnR",
+    "name": "Ariana Grande"
+  },
+  {
+    "id": "00FQb4jTyendYWaN8pK0wa",
+    "name": "Lana Del Rey"
+  },
+  {
+    "id": "06HL4z0CvFAxyc27GXpf02",
+    "name": "Taylor Swift"
+  },
+  {
+    "id": "5pKCCKE2ajJHZ9KAiaK11H",
+    "name": "Rihanna"
+  },
+  {
+    "id": "3QVolfxko2UyCOtexhVTli",
+    "name": "Angèle"
+  },
+  {
+    "id": "4S9EykWXhStSc15wEx8QFK",
+    "name": "Céline Dion"
+  },
+  {
+    "id": "5WUlDfRSoLAfcVSX1WnrxN",
+    "name": "Sia"
+  },
+  {
+    "id": "53XhwfbYqKCa1cC15pYq2q",
+    "name": "Imagine Dragons"
+  },
+  {
+    "id": "0EmeFodog0BfCgMzAIvKQp",
+    "name": "Shakira"
+  },
+  {
+    "id": "1HY2Jd0NmPuamShAr6KMms",
+    "name": "Lady Gaga"
+  },
+  {
+    "id": "6jJ0s89eD6GaHleKKya26X",
+    "name": "Katy Perry"
+  },
+  {
+    "id": "45dkTj5sMRSjrmBSBeiHym",
+    "name": "Tate McRae"
+  },
+  {
+    "id": "4gzpq5DPGxSnKTe4SA8HAU",
+    "name": "Coldplay"
+  },
+  {
+    "id": "6M2wZ9GZgrQXHCFfjv46we",
+    "name": "Dua Lipa"
+  },
+  {
+    "id": "250b0Wlc5Vk0CoUsaCY84M",
+    "name": "JENNIE"
+  },
+  {
+    "id": "2dIgFjalVxs4ThymZ67YCE",
+    "name": "Stray Kids"
+  },
+  {
+    "id": "6eUKZXaKkcviH0Ku9w2n3V",
+    "name": "Ed Sheeran"
+  },
+  {
+    "id": "33qOK5uJ8AR2xuQQAhHump",
+    "name": "Teddy Swims"
+  },
+  {
+    "id": "3wcj11K77LjEY1PkEazffa",
+    "name": "Burna Boy"
+  },
+  {
+    "id": "0TnOYISbd1XYRBk9myaseg",
+    "name": "Pitbull"
+  },
+  {
+    "id": "0hCNtLu0JehylgoiP8L4Gh",
+    "name": "Nicki Minaj"
+  },
+  {
+    "id": "5cj0lLjcoR7YOSnhnX0Po5",
+    "name": "Doja Cat"
+  },
+  {
+    "id": "6vWDO969PvNqNYHIOW5v0m",
+    "name": "Beyoncé"
+  },
+  {
+    "id": "00x1fYSGhdqScXBRpSj3DW",
+    "name": "Olivia Dean"
+  },
+  {
+    "id": "3c0gDdb9lhnHGFtP4prQpn",
+    "name": "KATSEYE"
+  },
+  {
+    "id": "4ueh4hmRvt62k4BgP8dIS0",
+    "name": "Adèle Castillon"
+  },
+  {
+    "id": "4Nrd0CtP8txoQhnnlRA6V6",
+    "name": "Vianney"
+  },
+  {
+    "id": "7jgnJBnpZTiGnCF2Wvka2Z",
+    "name": "Christophe Maé"
+  },
+  {
+    "id": "4dpARuHxo51G3z768sgnrY",
+    "name": "Adele"
+  },
+  {
+    "id": "26dSoYclwsYLMAKD3tpOr4",
+    "name": "Britney Spears"
+  },
+  {
+    "id": "4G9NDjRyZFDlJKMRL8hx3S",
+    "name": "sombr"
+  },
+  {
+    "id": "04gDigrS5kc9YWfZHwBETP",
+    "name": "Maroon 5"
+  },
+  {
+    "id": "6KImCVD70vtIoJWnq6nGn3",
+    "name": "Harry Styles"
+  },
+  {
+    "id": "0ys2OFYzWYB5hRDLCsBqxt",
+    "name": "Fuerza Regida"
+  },
+  {
+    "id": "2wMA0cyQGggqKOjMfUNenu",
+    "name": "TeddyBear"
+  },
+  {
+    "id": "02gSuSAWEdWa5UOvqzjX6v",
+    "name": "SIENNA SPIRO"
+  },
+  {
+    "id": "2sBKOwN0fSjx39VtL2WpjJ",
+    "name": "La Fève"
+  },
+  {
+    "id": "1QAJqy2dA3ihHBFIHRphZj",
+    "name": "Cigarettes After Sex"
+  },
+  {
+    "id": "74KM79TiuVKeVCqs8QtB0B",
+    "name": "Sabrina Carpenter"
+  },
+  {
+    "id": "0z4gvV4rjIZ9wHck67ucSV",
+    "name": "Akon"
+  },
+  {
+    "id": "4YRxDV8wJFPHPTeXepOstw",
+    "name": "Arijit Singh"
+  },
+  {
+    "id": "1yxSLGMDHlW21z4YXirZDS",
+    "name": "Black Eyed Peas"
+  },
+  {
+    "id": "31TPClRtHm23RisEBtV3X7",
+    "name": "Justin Timberlake"
+  },
+  {
+    "id": "6tbjWDEIzxoDsBA1FuhfPW",
+    "name": "Madonna"
+  },
+  {
+    "id": "4SIilF0jRmvr4CAbjWCSiG",
+    "name": "Cab"
+  },
+  {
+    "id": "7sQAmtXffOMZRQpWMvxByN",
+    "name": "NG17"
+  },
+  {
+    "id": "7HhTZ8c79x9sxqpmjUSKgB",
+    "name": "A.Baby"
+  },
+  {
+    "id": "0u7NQfoSwAOc7VLZL9iZqC",
+    "name": "Young Roe Escobar"
+  },
+  {
+    "id": "1ZubhaVT7ghT4GjoRJkZtb",
+    "name": "Mall City"
+  },
+  {
+    "id": "1RAAdUSii7asE4g2CYZxAD",
+    "name": "Savveh"
+  },
+  {
+    "id": "3KK648r4sJfV6tA6eS0w7m",
+    "name": "OBN CHINO"
+  },
+  {
+    "id": "6Mutx9Uagi4QWHCIk4BowU",
+    "name": "JasonUndefined"
+  },
+  {
+    "id": "7nzRFbqXwdtF4nh5HpHVof",
+    "name": "Hustlamade Bugzy"
+  },
+  {
+    "id": "7tJtZOywrePrl6efkROtes",
+    "name": "Shaz the Rapper"
+  },
+  {
+    "id": "4mNxnwcVqQuL7jRVENTPsM",
+    "name": "Reta & Burke"
+  },
+  {
+    "id": "2avPldjSKTkhQ0inrZsh1l",
+    "name": "BumBum Kunst"
+  },
+  {
+    "id": "6Te49r3A6f5BiIgBRxH7FH",
+    "name": "Ninho"
+  },
+  {
+    "id": "0b1sIQumIAsNbqAoIClSpy",
+    "name": "j-hope"
+  },
+  {
+    "id": "3vUMXQ9kPnZAQkMkZZ7Hfh",
+    "name": "Tiakola"
+  },
+  {
+    "id": "7zFBW2JxM4bgTTKxCRcS8Q",
+    "name": "Hiphop Tamizha"
+  },
+  {
+    "id": "3IW7ScrzXmPvZhB27hmfgy",
+    "name": "Jul"
+  },
+  {
+    "id": "7EWU4FhUJM1sZQgQKdENeT",
+    "name": "Hopsin"
+  },
+  {
+    "id": "3YBJLs7RqR0aPGBgU27nDh",
+    "name": "Werenoi"
+  },
+  {
+    "id": "0LKAV3zJ8a8AIGnyc5OvfB",
+    "name": "SDM"
+  },
+  {
+    "id": "3DCWeG2J1fZeu0Oe6i5Q6m",
+    "name": "PLK"
+  },
+  {
+    "id": "0vLuOi2k62sHujIfplInlK",
+    "name": "Hungria"
+  },
+  {
+    "id": "0GOx72r5AAEKRGQFn3xqXK",
+    "name": "GIMS"
+  },
+  {
+    "id": "6k9F0oaxCXxbdTFDTdZihN",
+    "name": "La Rvfleuze"
+  },
+  {
+    "id": "3NH8t45zOTqzlZgBvZRjvB",
+    "name": "PNL"
+  },
+  {
+    "id": "51OKuyM4BiiYxFm8Mi6fa9",
+    "name": "Mauvais djo"
+  },
+  {
+    "id": "4hYxvgmTzS29XAXlo5adgM",
+    "name": "L2B"
+  },
+  {
+    "id": "3hWQDRr1PqwvnHeiZlucBq",
+    "name": "Bouss"
+  },
+  {
+    "id": "3TVXtAsR1Inumwj472S9r4",
+    "name": "Drake"
+  },
+  {
+    "id": "5hREZP0zTQbTLkZ2M8RS4v",
+    "name": "Djadja & Dinaz"
+  },
+  {
+    "id": "2UwqpfQtNuhBwviIC0f2ie",
+    "name": "Damso"
+  },
+  {
+    "id": "58wXmynHaAWI5hwlPZP3qL",
+    "name": "Booba"
+  },
+  {
+    "id": "3TP2Ucsow6rW1s24aq9gb4",
+    "name": "Lagui"
+  },
+  {
+    "id": "3PpJbrAbphauEun8Xf9tD2",
+    "name": "Theodora"
+  },
+  {
+    "id": "5gqmbbfjcikQBzPB5Hv13I",
+    "name": "Gazo"
+  },
+  {
+    "id": "5OLkn5GT6EcMuJzjwgvQnu",
+    "name": "Vacra"
+  },
+  {
+    "id": "4sbXXFzEWJY2zsZjelerjX",
+    "name": "Dadju"
+  },
+  {
+    "id": "2kXKa3aAFngGz2P4GjG5w2",
+    "name": "SCH"
+  },
+  {
+    "id": "6L34dW6SKMSDaGIfYDU19j",
+    "name": "Maes"
+  },
+  {
+    "id": "6HCBnyTBSLdb3TFn2ayulY",
+    "name": "Leto"
+  },
+  {
+    "id": "5gs4Sm2WQUkcGeikMcVHbh",
+    "name": "Hamza"
+  },
+  {
+    "id": "6dbdXbyAWk2qx8Qttw0knR",
+    "name": "Josman"
+  },
+  {
+    "id": "2kIs76sEGiulKeqetZq6ua",
+    "name": "Jok'air"
+  },
+  {
+    "id": "1q7T9rFQ2a2ukA1PU51fo3",
+    "name": "Koba LaD"
+  },
+  {
+    "id": "1wAtSe79kItIb9nf5EhI2Q",
+    "name": "Niro"
+  },
+  {
+    "id": "5vnUF9uAL0ly7qw25ERLuC",
+    "name": "TK"
+  },
+  {
+    "id": "78iJ2FMbYAFY3djO4PbWZi",
+    "name": "La Mano 1.9"
+  },
+  {
+    "id": "2zW6nGPGBEaGNENvqaw9lo",
+    "name": "Bello&Dallas"
+  },
+  {
+    "id": "7dGJo4pcD2V6oG8kP0tJRR",
+    "name": "Eminem"
+  },
+  {
+    "id": "5K4W6rqBFWDnAN6FQUkS6x",
+    "name": "Kanye West"
+  },
+  {
+    "id": "3fMbdgg4jU18AjLCKBhRSm",
+    "name": "Michael Jackson"
+  },
+  {
+    "id": "07YZf4WDAMNwqr4jfgOZ8y",
+    "name": "Jason Derulo"
+  },
+  {
+    "id": "1Xyo4u8uXC1ZmMpatF05PJ",
+    "name": "The Weeknd"
+  },
+  {
+    "id": "1CoZyIx7UvdxT5c8UkMzHd",
+    "name": "Jorja Smith"
+  },
+  {
+    "id": "2h93pZq0e7k5yf4dywlkpM",
+    "name": "Frank Ocean"
+  },
+  {
+    "id": "5KKpBU5eC2tJDzf0wmlRp2",
+    "name": "RAYE"
+  },
+  {
+    "id": "7tYKF4w9nC0nq9CsPZTHyP",
+    "name": "SZA"
+  },
+  {
+    "id": "7bXgB6jMjp9ATFy66eO08Z",
+    "name": "Chris Brown"
+  },
+  {
+    "id": "3FvwVFWRyvxmLyVBO9nBmM",
+    "name": "COLORS"
+  },
+  {
+    "id": "3DiDSECUqqY1AuBP8qtaIa",
+    "name": "Alicia Keys"
+  },
+  {
+    "id": "23zg3TcAtWQy7J6upgbUnj",
+    "name": "USHER"
+  },
+  {
+    "id": "57vWImR43h4CaDao012Ofp",
+    "name": "Steve Lacy"
+  },
+  {
+    "id": "20wkVLutqVOYrc0kxFs7rA",
+    "name": "Daniel Caesar"
+  },
+  {
+    "id": "2HPaUgqeutzr3jx5a9WyDV",
+    "name": "PARTYNEXTDOOR"
+  },
+  {
+    "id": "7eKkW1zo5uzW8kUntiiBvz",
+    "name": "Malcolm Todd"
+  },
+  {
+    "id": "7c0XG5cIJTrrAgEC3ULPiq",
+    "name": "Ty Dolla $ign"
+  },
+  {
+    "id": "1U1el3k54VvEUzo3ybLPlM",
+    "name": "Kali Uchis"
+  },
+  {
+    "id": "21E3waRsmPlU7jZsS13rcj",
+    "name": "Ne-Yo"
+  },
+  {
+    "id": "73sIBHcqh3Z3NyqHKZ7FOL",
+    "name": "Childish Gambino"
+  },
+  {
+    "id": "7cYEt1pqMgXJdq00hAwVpT",
+    "name": "Chase Atlantic"
+  },
+  {
+    "id": "687cZJR45JO7jhk1LHIbgq",
+    "name": "Tems"
+  },
+  {
+    "id": "6LuN9FCkKOj5PcnpouEgny",
+    "name": "Khalid"
+  },
+  {
+    "id": "2EMAnMvWE2eb56ToJVfCWs",
+    "name": "Bryson Tiller"
+  },
+  {
+    "id": "7guDJrEfX3qb6FEbdPA5qi",
+    "name": "Stevie Wonder"
+  },
+  {
+    "id": "3aQeKQSyrW4qWr35idm0cy",
+    "name": "T-Pain"
+  },
+  {
+    "id": "360IAlyVv4PCEVjgyMZrxK",
+    "name": "Miguel"
+  },
+  {
+    "id": "3tlXnStJ1fFhdScmQeLpuG",
+    "name": "Brent Faiyaz"
+  },
+  {
+    "id": "2jku7tDXc6XoB6MO2hFuqg",
+    "name": "Tory Lanez"
+  },
+  {
+    "id": "6XpaIBNiVzIetEPCWDvAFP",
+    "name": "Whitney Houston"
+  },
+  {
+    "id": "5ZS223C6JyBfXasXxrRqOk",
+    "name": "Jhené Aiko"
+  },
+  {
+    "id": "3SozjO3Lat463tQICI9LcE",
+    "name": "Tyla"
+  },
+  {
+    "id": "0TImkz4nPqjegtVSMZnMRq",
+    "name": "TLC"
+  },
+  {
+    "id": "4QQgXkCYTt3BlENzhyNETg",
+    "name": "Earth, Wind & Fire"
+  },
+  {
+    "id": "0cGUm45nv7Z6M6qdXYQGTX",
+    "name": "Kehlani"
+  },
+  {
+    "id": "5RTLRtXjbXI2lSXc6jxlAz",
+    "name": "Ravyn Lenae"
+  },
+  {
+    "id": "3jK9MiCrA42lLAdMGUZpwa",
+    "name": "Anderson .Paak"
+  },
+  {
+    "id": "3koiLjNrgRTNbOwViDipeA",
+    "name": "Marvin Gaye"
+  },
+  {
+    "id": "0NIIxcxNHmOoyBx03SfTCD",
+    "name": "Tinashe"
+  },
+  {
+    "id": "5a2EaR3hamoenG9rDuVn8j",
+    "name": "Prince"
+  },
+  {
+    "id": "4fxd5Ee7UefO4CUXgwJ7IP",
+    "name": "GIVĒON"
+  },
+  {
+    "id": "0Wwji82sLA0Hcvtuak3omb",
+    "name": "AUDREY NUNA"
+  },
+  {
+    "id": "1Y8cdNmUJH7yBTd9yOvr5i",
+    "name": "Destiny's Child"
+  },
+  {
+    "id": "1vfezMIyCr4XUdYRaKIKi3",
+    "name": "Keyshia Cole"
+  },
+  {
+    "id": "4E2rKHVDssGJm2SCDOMMJB",
+    "name": "Doechii"
+  },
+  {
+    "id": "0PCCGZ0wGLizHt2KZ7hhA2",
+    "name": "Artemas"
+  },
+  {
+    "id": "1ThoqLcyIYvZn7iWbj8fsj",
+    "name": "Bill Withers"
+  },
+  {
+    "id": "57LYzLEk2LcFghVwuWbcuS",
+    "name": "Summer Walker"
+  },
+  {
+    "id": "6XTGKOV9jceQ6f67lnhpbF",
+    "name": "LATIN MAFIA"
+  },
+  {
+    "id": "10JZkvi2NuyvCIuRDppggx",
+    "name": "Gene Rockwell"
+  },
+  {
+    "id": "2BTv9lh3eK1jzB1vc3tW6x",
+    "name": "Genki Rockets"
+  },
+  {
+    "id": "5INjqkS1o8h1imAzPqGZBb",
+    "name": "Tame Impala"
+  },
+  {
+    "id": "6XyY86QOPPrYVGvF9ch6wz",
+    "name": "Linkin Park"
+  },
+  {
+    "id": "1dfeR4HaWDbWqFHLkxsg1d",
+    "name": "Queen"
+  },
+  {
+    "id": "0L8ExT028jH3ddEcZwqJJ5",
+    "name": "Red Hot Chili Peppers"
+  },
+  {
+    "id": "3YQKmKGau1PzlVlkL1iodx",
+    "name": "Twenty One Pilots"
+  },
+  {
+    "id": "7Ln80lUS6He07XvHI8qqHH",
+    "name": "Arctic Monkeys"
+  },
+  {
+    "id": "4Z8W4fKeB5YxbusRsdQVPb",
+    "name": "Radiohead"
+  },
+  {
+    "id": "711MCceyCBcFnzjGY4Q7Un",
+    "name": "AC/DC"
+  },
+  {
+    "id": "2ye2Wgw4gimLv2eAKyk1NB",
+    "name": "Metallica"
+  },
+  {
+    "id": "08GQAI4eElDnROBrJRGE0X",
+    "name": "Fleetwood Mac"
+  },
+  {
+    "id": "6olE6TJLqED3rqDCT0FyPh",
+    "name": "Nirvana"
+  },
+  {
+    "id": "3PhoLpVuITZKcymswpck5b",
+    "name": "Elton John"
+  },
+  {
+    "id": "51Blml2LZPmy7TTiAg47vQ",
+    "name": "U2"
+  },
+  {
+    "id": "3WrFJ7ztbogyGnTHbHJFl2",
+    "name": "The Beatles"
+  },
+  {
+    "id": "12Chz98pHFMPJEknJQMWvI",
+    "name": "Muse"
+  },
+  {
+    "id": "0k17h0D3J5VfsdmQ1iZtE9",
+    "name": "Pink Floyd"
+  },
+  {
+    "id": "3qm84nBOXUEQ2vnTfUTTFC",
+    "name": "Guns N' Roses"
+  },
+  {
+    "id": "5mHUmlJWkcoOk1NbjfrXWz",
+    "name": "Temper City"
+  },
+  {
+    "id": "4lxfqrEsLX6N1N4OCSkILp",
+    "name": "Phil Collins"
+  },
+  {
+    "id": "7oPftvlwr6VrsViSDV7fJY",
+    "name": "Green Day"
+  },
+  {
+    "id": "7t0rwkOPGlDPEhaOcVtOt9",
+    "name": "The Cranberries"
+  },
+  {
+    "id": "2DaxqgrOhkeH0fpeiQq2f4",
+    "name": "Oasis"
+  },
+  {
+    "id": "0oSGxfWSnnOXhD2fKuz2Gy",
+    "name": "David Bowie"
+  },
+  {
+    "id": "0WwSkZ7LtFUFjGjMZBMt6T",
+    "name": "Dire Straits"
+  },
+  {
+    "id": "22bE4uQ6baNwSHPVcDxLCe",
+    "name": "The Rolling Stones"
+  },
+  {
+    "id": "0epOFNiUfyON9EYx7Tpr6V",
+    "name": "The Strokes"
+  },
+  {
+    "id": "43ZHCT0cAZBISjO8DG9PnE",
+    "name": "Elvis Presley"
+  },
+  {
+    "id": "27T030eWyCQRmDyuvr1kxY",
+    "name": "Scorpions"
+  },
+  {
+    "id": "6deZN1bslXzeGvOLaLMOIF",
+    "name": "Nickelback"
+  },
+  {
+    "id": "3IYUhFvPQItj6xySrBmZkd",
+    "name": "Creedence Clearwater Revival"
+  },
+  {
+    "id": "58lV9VcRSjABbAbfWS6skp",
+    "name": "Bon Jovi"
+  },
+  {
+    "id": "3yY2gUcIsjMr8hjo51PoJ8",
+    "name": "The Smiths"
+  },
+  {
+    "id": "2xiIXseIJcq3nG7C8fHeBj",
+    "name": "Three Days Grace"
+  },
+  {
+    "id": "2qk9voo8llSGYcZ6xrBzKx",
+    "name": "Kings of Leon"
+  },
+  {
+    "id": "5NGO30tJxFlKixkPSgXcFE",
+    "name": "The Police"
+  },
+  {
+    "id": "0C0XlULifJtAgn6ZNCW2eu",
+    "name": "The Killers"
+  },
+  {
+    "id": "49bzE5vRBRIota4qeHtQM8",
+    "name": "Skillet"
+  },
+  {
+    "id": "0ghlgldX5Dd6720Q3qFyQB",
+    "name": "TOMORROW X TOGETHER"
+  },
+  {
+    "id": "6XYvaoDGE0VmRt83Jss9Sn",
+    "name": "King Gizzard & The Lizard Wizard"
+  },
+  {
+    "id": "0Ty63ceoRnnJKVEYP0VQpk",
+    "name": "Sting"
+  },
+  {
+    "id": "7Ey4PD4MYsKc5I2dolUwbH",
+    "name": "Aerosmith"
+  },
+  {
+    "id": "36QJpDe2go2KgaRleHCDTp",
+    "name": "Led Zeppelin"
+  },
+  {
+    "id": "1hzfo8twXdOegF3xireCYs",
+    "name": "Milky Chance"
+  },
+  {
+    "id": "6zFYqv1mOsgBRQbae3JJ9e",
+    "name": "Billy Joel"
+  },
+  {
+    "id": "0ECwFtbIWEVNwjlrfc6xoL",
+    "name": "Eagles"
+  },
+  {
+    "id": "0PFtn5NtBbbUNbU9EAmIWF",
+    "name": "TOTO"
+  },
+  {
+    "id": "0fTSzq9jAh4c36UVb4V7CB",
+    "name": "Alex Warren"
+  },
+  {
+    "id": "2qanRMyA5bNuTvz1dK45OP",
+    "name": "ADÉLA"
+  },
+  {
+    "id": "6CLK013UumRbFXYJIYvRnz",
+    "name": "Cherry Pie"
+  },
+  {
+    "id": "22wbnEMDvgVIAGdFeek6ET",
+    "name": "Benson Boone"
+  }
+]
